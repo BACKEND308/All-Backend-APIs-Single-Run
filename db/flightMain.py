@@ -1,4 +1,4 @@
-from flightConnect import connectDB,connect_mysql, fetch_data_from_mongodb, create_table_and_insert_data
+from connect import connectDB,connect_mysql, fetch_data_from_mongodb, create_table_and_insert_data
 
 def insert_flight_information(db, flight_information_data):
     flight_information_collection = db.flight_information

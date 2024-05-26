@@ -1,4 +1,4 @@
-from cabinCrewConnect import connectDB,connect_mysql, fetch_data_from_mongodb, create_table_and_insert_data
+from connect import connectDB,connect_mysql, fetch_data_from_mongodb, create_table_and_insert_data
 import bson
 import random
 

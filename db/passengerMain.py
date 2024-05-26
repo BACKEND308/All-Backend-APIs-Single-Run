@@ -1,5 +1,5 @@
 import os
-from passengerConnect import connectDB,connect_mysql, fetch_data_from_mongodb, create_table_and_insert_data
+from connect import connectDB,connect_mysql, fetch_data_from_mongodb, create_table_and_insert_data
 from enum import Enum
 import random
 import string 
