@@ -5,16 +5,52 @@ const router = express.Router();
 
 // POST route to create a new flight
 router.post('/flights', async (req, res) => {
+  // Destructure all fields from req.body
+  const {
+    FlightNumber,
+    Date,
+    FlightDuration,
+    FlightDistance,
+    FlightSource,
+    FlightDestination,
+    VehicleType,
+    SharedFlightInfo
+  } = req.body;
+
+  // List of required fields for easy management and error message generation
+  const requiredFields = [
+    { key: 'FlightNumber', name: 'Flight Number' },
+    { key: 'Date', name: 'Date' },
+    { key: 'FlightDuration', name: 'Flight Duration' },
+    { key: 'FlightDistance', name: 'Flight Distance' },
+    { key: 'FlightSource', name: 'Flight Source' },
+    { key: 'FlightDestination', name: 'Flight Destination' },
+    { key: 'VehicleType', name: 'Vehicle Type' }
+  ];
+
+  // Check for missing fields and collect all missing field names
+  let missingFields = requiredFields
+    .filter(field => req.body[field.key] === undefined)
+    .map(field => field.name);
+
+  // If there are missing fields, return an error message with the list of missing fields
+  if (missingFields.length > 0) {
+    return res.status(400).json({
+      message: `Missing required fields: ${missingFields.join(', ')}`
+    });
+  }
+
+  // Proceed with creation if all fields are present
   try {
     const newFlight = new Flight({
-      FlightNumber: req.body.FlightNumber,
-      Date: req.body.Date,
-      FlightDuration: req.body.FlightDuration,
-      FlightDistance: req.body.FlightDistance,
-      FlightSource: req.body.FlightSource,
-      FlightDestination: req.body.FlightDestination,
-      VehicleType: req.body.VehicleType,
-      SharedFlightInfo: req.body.SharedFlightInfo
+      FlightNumber,
+      Date,
+      FlightDuration,
+      FlightDistance,
+      FlightSource,
+      FlightDestination,
+      VehicleType,
+      SharedFlightInfo
     });
     await newFlight.save();
     res.status(201).json(newFlight);
@@ -22,6 +58,7 @@ router.post('/flights', async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
+
 
 // GET route to retrieve all flights
 router.get('/flights', async (req, res) => {
