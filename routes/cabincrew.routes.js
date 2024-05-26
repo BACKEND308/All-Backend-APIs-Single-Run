@@ -77,13 +77,92 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
-// PATCH route to update a cabin crew member's assigned seat
-router.patch('/:id', async (req, res) => {
+// Endpoint to add a new chef
+router.post('/chefs', async (req, res) => {
+    const { CrewID, MemberName, Age, Gender, Nationality, Known_Languages, Aircraft_Restrictions, Dishes, Featured_Dish } = req.body;
     try {
-        const cabinCrew = await CabinCrew.findById(req.params.id);
+        const newChef = new Chefs({
+            CrewID,
+            MemberName,
+            Age,
+            Gender,
+            Nationality,
+            Known_Languages,
+            Aircraft_Restrictions,
+            Dishes,
+            Featured_Dish
+        });
+        await newChef.save();
+
+        // Optionally, create a corresponding CabinCrew entry
+        const newCabinCrew = new CabinCrew({
+            CrewID,
+            Age,
+            Aircraft_Restrictions,
+            ChefID: newChef._id,
+            Gender,
+            Known_Languages,
+            MemberName,
+            Nationality,
+            Role: 'chef'
+        });
+        await newCabinCrew.save();
+
+        res.status(201).json({ message: 'Chef and CabinCrew created successfully', newChef, newCabinCrew });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+// Endpoint to update a chef
+router.patch('/chefs/:id', async (req, res) => {
+    const { id } = req.params;
+    const updates = req.body;
+
+    try {
+        const updatedChef = await Chefs.findByIdAndUpdate(id, updates, { new: true });
+        if (!updatedChef) {
+            return res.status(404).json({ message: 'Chef not found' });
+        }
+
+        // Update the corresponding CabinCrew document if necessary
+        const updatedCabinCrew = await CabinCrew.findOneAndUpdate(
+            { ChefID: id },
+            {
+                Age: updatedChef.Age,
+                Aircraft_Restrictions: updatedChef.Aircraft_Restrictions,
+                Gender: updatedChef.Gender,
+                Known_Languages: updatedChef.Known_Languages,
+                MemberName: updatedChef.MemberName,
+                Nationality: updatedChef.Nationality,
+                Role: updatedChef.Role
+            },
+            { new: true }
+        );
+
+        res.json({ message: 'Chef and CabinCrew updated successfully', updatedChef, updatedCabinCrew });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
+// PATCH route to update a cabin crew member's assigned seat
+router.patch('/assign-seat/:id', async (req, res) => {
+    // const crewid=req.params.crewid;
+    try {
+        const { id } = req.params; // Extract ID from URL parameters
+        const { Assigned_Seat } = req.body; // Extract Assigned_Seat from request body
+
+        // Validate that Assigned_Seat is provided
+        if (!Assigned_Seat) {
+            return res.status(400).json({ message: 'Assigned_Seat is required' });
+        }
+
+        const cabinCrew = await CabinCrew.findById(id); //CabinCrew.findOne({ CrewID: req.params.CrewID });
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
-        cabinCrew.Assigned_Seat = req.body.Assigned_Seat;
+        cabinCrew.Assigned_Seat = Assigned_Seat;
         const updatedCabinCrew = await cabinCrew.save();
         res.json(updatedCabinCrew);
     } catch (err) {
