@@ -1,0 +1,727 @@
+{
+	"info": {
+		"_postman_id": "eb235cda-4941-4047-aae2-253be64e9dab",
+		"name": "Flight Crew and Information APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35171721"
+	},
+	"item": [
+		{
+			"name": "Cabin Crew API",
+			"item": [
+				{
+					"name": "Get All Cabin Crew",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/cabincrew",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cabincrew"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cabin Crew by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/cabincrew/66535d4fb22e245868e16ca5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cabincrew",
+								"66535d4fb22e245868e16ca5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Cabin Crew",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"CrewID\": \"\",\n    \"Role\": \"\",\n    \"MemberName\": \"\",\n    \"AssignedSeat\": \"\",\n    \"Age\": \"\",\n    \"AircraftRestrictions\": \"\",\n    \"Gender\": \"\",\n    \"Known_Languages\": \"\",\n    \"Nationality\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cabincrew",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cabincrew"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Cabin Crew by ID",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"MemberName\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cabincrew/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cabincrew",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cabin Crew by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/cabincrew/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cabincrew",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flight Crew Pilot Information API",
+			"item": [
+				{
+					"name": "Get All Pilots",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/pilots",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pilots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pilot by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/pilots/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pilots",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pilot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"PilotID\": \"\",\n    \"Name\": \"\",\n    \"Rank\": \"\",\n    \"FlightHours\": \"\",\n    \"LicenseNumber\": \"\",\n    \"AircraftType\": \"\",\n    \"BaseAirport\": \"\",\n    \"Nationality\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/pilots",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pilots"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pilot by ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"\",\n    \"Rank\": \"\",\n    \"FlightHours\": \"\",\n    \"LicenseNumber\": \"\",\n    \"AircraftType\": \"\",\n    \"BaseAirport\": \"\",\n    \"Nationality\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/pilots/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pilots",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pilot by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/pilots/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pilots",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flight Information API",
+			"item": [
+				{
+					"name": "Create Flight",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"FlightNumber\": \"\",\n    \"DepartureAirport\": \"\",\n    \"ArrivalAirport\": \"\",\n    \"FlightDate\": \"\",\n    \"DepartureTime\": \"\",\n    \"ArrivalTime\": \"\",\n    \"Price\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/flights",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"flights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Flights",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/get/flights",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"get",
+								"flights"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Flight by FlightNumber",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/flights/:FlightNumber",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"flights",
+								":FlightNumber"
+							],
+							"variable": [
+								{
+									"key": "FlightNumber",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Flight by FlightNumber",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DepartureAirport\": \"\",\n    \"ArrivalAirport\": \"\",\n    \"FlightDate\": \"\",\n    \"DepartureTime\": \"\",\n    \"ArrivalTime\": \"\",\n    \"Price\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/flights/:FlightNumber",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"flights",
+								":FlightNumber"
+							],
+							"variable": [
+								{
+									"key": "FlightNumber",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Flight by FlightNumber",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/flights/:FlightNumber",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"flights",
+								":FlightNumber"
+							],
+							"variable": [
+								{
+									"key": "FlightNumber",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Passenger Information API",
+			"item": [
+				{
+					"name": "Get All Passengers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/passengers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"passengers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Passenger by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/passengers/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"passengers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Passenger",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"FirstName\": \"\",\n    \"LastName\": \"\",\n    \"PassportNumber\": \"\",\n    \"Nationality\": \"\",\n    \"DateOfBirth\": \"\",\n    \"Gender\": \"\",\n    \"with_a_Child\": false,\n    \"child\": {\n        \"FirstName\": \"\",\n        \"LastName\": \"\",\n        \"PassportNumber\": \"\",\n        \"Nationality\": \"\",\n        \"DateOfBirth\": \"\",\n        \"Gender\": \"\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/passengers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"passengers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Passenger by ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"FirstName\": \"\",\n    \"LastName\": \"\",\n    \"PassportNumber\": \"\",\n    \"Nationality\": \"\",\n    \"DateOfBirth\": \"\",\n    \"Gender\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/passengers/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"passengers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Passenger by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/passengers/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"passengers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roster API",
+			"item": [
+				{
+					"name": "Get All Roster Entries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/roster/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"roster",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Roster by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/roster/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"roster",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Authentication API",
+			"item": [
+				{
+					"name": "Check if email exists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/user/check-email?email=user105@example.com",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"check-email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "user105@example.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check user type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/user/check-type/newuser@example.com",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"check-type",
+								"newuser@example.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register new user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"passenger\",\r\n  \"email\": \"newuser@example.com\",\r\n  \"password\": \"securepssword123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"user105@example.com\",\r\n  \"password\": \"password105\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/user/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/user/delete/user104@example.com",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"delete",
+								"user104@example.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
