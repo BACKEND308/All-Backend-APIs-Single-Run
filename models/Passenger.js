@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
 
+const ParentInfoSchema = new mongoose.Schema({
+  Parent_id: { type: String },
+  Seat_assigned: { type: String }
+}, { _id: false });
+
 const PassengerSchema = new mongoose.Schema({
-  passenger_id: {
+  Passenger_id: {
     type: String,
     required: true,
     unique: true
@@ -10,7 +15,7 @@ const PassengerSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  Flight_ID: {
+  Flight_id: {
     type: String,
     required: true
   },
@@ -29,7 +34,7 @@ const PassengerSchema = new mongoose.Schema({
   Seat_type: {
     type: String,
     required: true,
-    enum: ['business', 'economy', 'None'],
+    enum: ['Economy', 'Business'],
     default: 'None'
   },
   Seat_assigned: {
@@ -41,8 +46,8 @@ const PassengerSchema = new mongoose.Schema({
     default: []
   },
   Parent_info: {
-    Parent_ID: {type: String},
-    Parent_Seat: {type: String}
+    type: [ParentInfoSchema],
+    default: []
   }
 }, { collection: 'passenger_info' });
 

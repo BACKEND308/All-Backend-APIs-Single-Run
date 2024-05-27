@@ -1,5 +1,7 @@
 const express = require('express');
-const Pilot= require('../models/Pilot');
+const Pilot = require('../models/Pilot');
+const PilotBusy = require('../models/PilotBusy');
+const FlightTable = require('../models/FlightTable');
 const router = express.Router();
 
 // Get all pilots
@@ -30,6 +32,16 @@ router.post('/', async (req, res) => {
   try {
     const pilot = new Pilot(req.body);
     await pilot.save();
+
+    const pilotBusy = new PilotBusy({
+      pilot_id: pilot.PilotID,
+      pilot_name: pilot.PilotName,
+      pilot_seniority: pilot.Seniority,
+      pilot_vehicle_restrictions: pilot.Vehicle_Restriction.split(', '),
+      busy_times: []
+    });
+    await pilotBusy.save();
+
     res.status(201).json(pilot);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -56,6 +68,14 @@ router.delete('/:id', async (req, res) => {
     if (!pilot) {
       return res.status(404).json({ error: 'Pilot not found' });
     }
+
+    await PilotBusy.findOneAndDelete({ pilot_id: pilot.PilotID });
+
+    await FlightTable.updateMany(
+      { pilot_id: pilot.PilotID },
+      { $unset: { pilot_id: "" } }
+    );
+
     res.json({ message: 'Pilot deleted' });
   } catch (error) {
     res.status(500).json({ error: error.message });
