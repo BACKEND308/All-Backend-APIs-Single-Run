@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET route to retrieve a cabin crew member by ID
-router.get('/:id', async (req, res) => {
+router.get('/crew-member/:id', async (req, res) => {
     console.log('Received ID:', req.params.id); // Log the received ID
     try {
         const cabinCrew = await CabinCrew.findById(req.params.id);
@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
 });
 
 // PATCH route to update a cabin crew member's name
-router.patch('/:id', async (req, res) => {
+router.patch('/update-name/:id', async (req, res) => {
     try {
         const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
@@ -64,7 +64,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 // PATCH route to update a cabin crew member's role
-router.patch('/:id', async (req, res) => {
+router.patch('/update-role/:id', async (req, res) => {
     try {
         const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
@@ -171,7 +171,7 @@ router.patch('/assign-seat/:id', async (req, res) => {
 });
 
 //PATCH route to update a cabin crew member's age
-router.patch('/:id', async (req, res) => {
+router.patch('/update-age/:id', async (req, res) => {
     try {
         const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
@@ -185,7 +185,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 //PATCH route to update a cabin crew member's aircraft restrictions
-router.patch('/:id', async (req, res) => {
+router.patch('/update-restrictions/:id', async (req, res) => {
     try {
         const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
@@ -199,7 +199,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 //PATCH route to update a cabin crew member's known languages
-router.patch('/:id', async (req, res) => {
+router.patch('/update-languages/:id', async (req, res) => {
     try {
         const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
@@ -213,7 +213,7 @@ router.patch('/:id', async (req, res) => {
 });
 
 //PATCH route to update a cabin crew member's nationality
-router.patch('/:id', async (req, res) => {
+router.patch('/update-nationality/:id', async (req, res) => {
     try {
         const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });  
@@ -227,13 +227,37 @@ router.patch('/:id', async (req, res) => {
 });
 
 // DELETE route to delete a cabin crew member by ID
-router.delete('/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     try {
         const cabinCrew = await CabinCrew.findById(req.params.id);
         if (!cabinCrew) return res.status(404).json({ message: 'Cabin crew member not found' });
 
         await cabinCrew.remove();
         res.json({ message: 'Cabin crew member deleted' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+//Assigns a random set of 1 to 3 aircraft types
+const getRandomAircraftRestrictions = () => {
+    const aircraftTypes = ['Boeing 747', 'Airbus A320', 'Airbus A350'];
+    const count = Math.floor(Math.random() * 3) + 1; // Random number between 1 and 3
+    const shuffled = aircraftTypes.sort(() => 0.5 - Math.random());
+    console.log(shuffled.slice(0, count));
+    return shuffled.slice(0, count);
+};
+
+
+//Route that updates all cabin crew members' Aircraft Restrictions
+router.patch('/update-all-aircraft-restrictions', async (req, res) => {
+    try {
+        const cabinCrew = await CabinCrew.find();
+        for (const crew of cabinCrew) {
+            crew.Aircraft_Restrictions = getRandomAircraftRestrictions();
+            await crew.save();
+        }
+        res.json({ message: 'Aircraft Restrictions updated for all cabin crew members' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
